@@ -184,6 +184,8 @@
     }
 }
 
+/* Фото карточки */
+
 .elements {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -228,6 +230,9 @@
     line-height: 29px;
     color:#000;
     margin: 25px 0 0 21px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
 }
 
 .element__button-like {
@@ -256,17 +261,24 @@
     }
 }
 
-.overlay {
+/* Попап */
+
+.popup {
     background: rgba(0, 0, 0, 0.5);
     width: 100%;
     height: 100%;
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
-    display: ;
+    display: none;
+    justify-content: center;
 }
 
-.popup {
+.popup__popup_opened {
+    display: flex;
+}
+
+.popup__container {
     width: 430px;
     height: 330px;
     background: #FFFFFF;
@@ -275,22 +287,15 @@
     color:#000;
     display: flex;
     flex-direction: column;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    margin-left: -215px;
-    margin-top: -165px;
+    align-self: center;
+
 }
 
 
 @media screen and (max-width: 767px) {
-    .popup {
+    .popup__container {
         width: 282px;
         height: 322px;
-        top: 50vh;
-        left: 50vw;
-        margin-left: -141px;
-        margin-top: -161px;
     }
 }
 
@@ -346,11 +351,11 @@
 }
 
 .popup__button-close {
-    position: absolute;
-    top: -58px;
-    right: -58px;
+    margin-top: -58px;
+    margin-right: -58px;
     background: none;
     border: none;
+    align-self: flex-end;
     transition: 1s;
 }
 
@@ -365,8 +370,7 @@
 
 @media screen and (max-width: 767px) {
     .popup__button-close {
-        top: -58px;
-        right: 0;
+        margin-right: 0;
     }
 }
 
