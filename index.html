@@ -7,7 +7,6 @@
   <link rel="stylesheet" href="./pages/index.css">
 </head>
 <body class="body">
-<div class="page">
     <header class="header">
         <a class="header__logo" href="#"><img src="./images/header-logo.svg" alt="Логотип Mesto"></a>
     </header>
@@ -17,7 +16,7 @@
                 <img class="profile__avatar" src="./images/Avatar.png" alt="фотография Жак-Ив Кусто">
                 <div class="profile__text">
                     <div class="profile__title"><h1 class="profile__name">Жак-Ив Кусто</h1>
-                        <button class="profile__edit-button"><svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <button class="profile__edit-button"><svg class="profile__svg-edit" xmlns="http://www.w3.org/2000/svg">
                             <path d="M10 1.32827L2.60377 8.7666L1.28302 7.41936L8.66038 0L10 1.32827ZM0 10L1.96226 9.41177L0.584906 8.08349L0 10Z" fill="white"/>
                             </svg>
                         </button>
@@ -87,22 +86,22 @@
                 </div>
             </div>
         </section>
-        <div class="popup">
-            <button type="reset"><svg width="58" height="58" viewBox="0 0 58 58" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M41.5709 13.2865L29.0001 25.8573L16.4293 13.2865L13.2866 16.4292L25.8574 29L13.2866 41.5708L16.4293 44.7135L29.0001 32.1427L41.5709 44.7135L44.7136 41.5708L32.1428 29L44.7136 16.4292L41.5709 13.2865Z" fill="white"/>
-                </svg>
-            </button>
-            <form>
-            <h2 class="popup__title">Редактировать профиль</h2>
-            <input name="name" class="popup__profile-name">
-            <input name="subtitile" class="popup__profile-subtitile">
-            <input type="submit">
-        </form>
-        </div>
     </main>
     <footer class="footer">
         <p class="footer__copyright">&copy; 2020 Mesto Russia</p>
     </footer>
+<div class="overlay">
+    <div class="popup">
+        <div class="popup__button-close">
+            <img class="popup__button-close-image" src="images/Close Icon.svg">
+        </div>
+        <form class="popup__form">
+                <h2 class="popup__title">Редактировать профиль</h2>
+                <input id="name" type="text" class="popup__profile-name" placeholder="Жак-Ив Кусто">
+                <input id="subtitile" type="text" placeholder="Исследователь океана" class="popup__profile-subtitile">
+                <button type="submit" class="popup__button-save">Сохранить</button>
+        </form>
+    </div>
 </div>
 </body>
 </html>
