@@ -1,0 +1,13 @@
+.element__button-like {
+    width: 48px;
+    height: 48px;
+    border:none;
+    border-radius: 4px;
+    background: none;
+    margin: 15px 10px 0 0;
+    transition: .3s;
+}
+
+.element__button-like:hover {
+    background: rgba(0, 0, 0, 0.07);
+}
