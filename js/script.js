@@ -3,8 +3,8 @@ let closeButton = document.querySelector('.popup__button-close');
 let popup = document.querySelector('.popup');
 let textTitle = document.querySelector('.profile__name');
 let textSubtitle = document.querySelector('.profile__subtitle');
-let profileName = document.querySelector('.popup__profile-name');
-let profileSubtitle = document.querySelector('.popup__profile-subtitile');
+let profileName = document.getElementById('profile-name');
+let profileSubtitle = document.getElementById('profile-profession');
 
 function fillProfileInputs() {
     profileName.value = textTitle.textContent;
