@@ -9,7 +9,7 @@ let profileSubtitle = document.querySelector('.popup__profile-subtitile');
 function fillProfileInputs() {
     profileName.value = textTitle.textContent;
     profileSubtitle.value = textSubtitle.textContent;
-//  хотел понять почему этот код, вместо ка выше не работал, буду рад если подскажите:
+//  Спасибо!
 //   profileName.innerHTML = '<input id="name" type="text" class="popup__profile-name" value="${textTitle.textContent}">';
 //   profileSubtitle.innerHTML = '<input id="subtitile" type="text" value="${textSubtitle.textContent}" class="popup__profile-subtitile">';
 //   console.log(profileName);
@@ -17,7 +17,7 @@ function fillProfileInputs() {
 
 function showPopup() {
     popup.classList.add('popup__popup_opened');
-    fillProfileInputs ()
+    fillProfileInputs ();
 }
 
 function hidePopup() {
@@ -37,7 +37,7 @@ function formSubmitHandler (evt) {
 
      textTitle.textContent = profileName.value;
      textSubtitle.textContent = profileSubtitle.value;
-     popup.classList.remove('popup__popup_opened');
+     hidePopup ();
 }
 
 formElement.addEventListener('submit', formSubmitHandler);

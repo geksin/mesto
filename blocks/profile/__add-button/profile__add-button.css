@@ -2,9 +2,10 @@
     width: 150px;
     height: 50px;
     align-self: center;
-    border: #ffffff solid 1px;
+    border: #ffffff solid 2px;
     background: none;
     transition: 0.3s;
+    border-radius: 2px;
 }
 
 .profile__add-button:hover {
