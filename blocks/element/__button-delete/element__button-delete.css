@@ -1,14 +1,16 @@
-.element__button-like {
+.element__button-delete {
     width: 48px;
     height: 48px;
     border:none;
     border-radius: 4px;
     background: none;
-    margin: 15px 10px 0 0;
+    right: 0;
+    top:0;
     transition: .3s;
+    position: absolute;
 }
 
-.element__button-like:hover {
+.element__button-delete:hover {
     opacity: 0.6;
     cursor: pointer;
 }
