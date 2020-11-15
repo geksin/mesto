@@ -64,15 +64,24 @@
 <template class="card__template">
     <article class="element">
         <img class="element__photo" src="" title="Фото пользователя" alt="Фото пользователя">
-        <button type="button" class="element__button-delete"><img src="./images/Trash.svg" title="удалить" alt="кнопка удаления">
-        </button>
+        <button type="button" class="element__button-delete"></button>
         <div class="element__down-part">
             <h2 class="element__name"></h2>
-            <button type="button" class="element__button-like"><img src="./images/like.svg" title="поставить лайк" alt="кнопка лайка">
-            </button>
+            <button type="button" class="element__button-like"></button>
         </div>
     </article>
  </template>
+
+    <div class="popup popup_image">
+        <div class="popup__container-image">
+            <button type="button" class="popup__button-close" id="popup-close-card">
+                <img class="popup__button-close-image" src="./images/close_icon.svg" alt="кнопка закрыть">
+            </button>
+            <img class="popup__img" src="https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg" title="" alt="">
+            <p class="popup__signature">Тайтл</p>
+        </div>
+    </div>
+
 
 <script src="./js/script.js"></script>
 </body>
