@@ -3,7 +3,7 @@
     height: 48px;
     border:none;
     border-radius: 4px;
-    background: url(/images/like.svg) no-repeat center;
+    background: url(./images/like.svg) no-repeat center;
     margin: 15px 10px 0 0;
     transition: .3s;
 }
@@ -14,5 +14,5 @@
 }
 
 .button-like_yes {
-    background: url(/images/like-solid.svg) no-repeat center;
+    background: url(./images/like-solid.svg) no-repeat center;
 }
