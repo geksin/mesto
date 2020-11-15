@@ -3,7 +3,7 @@
     height: 48px;
     border:none;
     border-radius: 4px;
-    background: url(./images/Trash.svg) no-repeat center;
+    background: url(../../../images/Trash.svg) no-repeat center;
     right: 0;
     top:0;
     transition: .3s;
