@@ -12,7 +12,6 @@ const inputCardName = document.getElementById('card-name');
 const inputCardLink = document.getElementById('card-link');
 const popupImage = document.querySelector('.popup_image');
 
-//Спасибо за правильный нейминг, где-то можно прочитать рекомендации? 
 
 function showPopup(popup) {
     popup.classList.add('popup_opened');
@@ -97,7 +96,6 @@ function addCardToContainer(data) {
 
 initialCards.forEach(addCardToContainer); 
 
-// Привет! Спасибо за замечания, переделал функцию, убрал дубляж кода, но как полностью удалить не сообразил. Там есть разница в том, нужно карточку в начало поместить. 
 
 function addCardToContainerStart (evt) {
     evt.preventDefault();

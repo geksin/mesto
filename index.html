@@ -38,11 +38,11 @@
         <button type="button" class="popup__button-close">
             <img class="popup__button-close-image" src="./images/close_icon.svg" alt="кнопка закрыть">
         </button>
-        <form class="popup__form" name="edit_profile">
+        <form class="popup__form popup__form_edit" name="edit_profile">
                 <h2 class="popup__title">Редактировать профиль</h2>
-                <input id="profile-name" name="profile-name" type="text" class="popup__profile-input" placeholder="Имя">
+                <input id="profile-name" name="profile-name" type="text" class="popup__profile-input" placeholder="Имя" minlength="2" maxlength="40" required>
                 <span id="profile-name-error" class="popup__profile-input-error"></span>
-                <input id="profile-profession" name="profile-profession" type="text" class="popup__profile-input" placeholder="Вид деятельности">
+                <input id="profile-profession" name="profile-profession" type="text" class="popup__profile-input" placeholder="Вид деятельности" minlength="2" maxlength="200" required>
                 <span id="profile-profession-error" class="popup__profile-input-error"></span>
                 <button type="submit" class="popup__button-save">Сохранить</button>
         </form>
@@ -54,13 +54,13 @@
         <button type="button" class="popup__button-close" id="popup-close-card">
             <img class="popup__button-close-image" src="./images/close_icon.svg" alt="кнопка закрыть">
         </button>
-        <form class="popup__form" name="edit_card">
+        <form class="popup__form popup__form_add" name="edit_card">
                 <h2 class="popup__title">Новое место</h2>
-                <input id="card-name" name="card-name" type="text" class="popup__profile-input popup__profile-input_error" placeholder="Название" required>
+                <input id="card-name" name="card-name" type="text" class="popup__profile-input" placeholder="Название" minlength="2" maxlength="30" required>
                 <span id="card-name-error" class="popup__profile-input-error"></span>
-                <input id="card-link" name="card-link" type="link" class="popup__profile-input" placeholder="Ссылка на картинку" required>
+                <input id="card-link" name="card-link" type="url" class="popup__profile-input" placeholder="Ссылка на картинку" required>
                 <span id="card-link-error" class="popup__profile-input-error"></span>
-                <button type="submit" class="popup__button-save popup__button-save_disabled">Сохранить</button>
+                <button type="submit" class="popup__button-save">Сохранить</button>
         </form>
     </div>
 </div>
@@ -85,7 +85,7 @@
             <p class="popup__signature"></p>
         </div>
     </div>
-
+<script src="./js/validate.js"></script>
 <script src="./js/initial-сards.js"></script>
 <script src="./js/script.js"></script>
 </body>
