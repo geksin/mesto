@@ -13,9 +13,16 @@ const inputCardLink = document.getElementById('card-link');
 const popupImage = document.querySelector('.popup_image');
 
 
+
 function showPopup(popup) {
     popup.classList.add('popup_opened');
+    popup.addEventListener('mousedown', (evt) => {
+        if (evt.target.classList.contains('popup')) {
+            hidePopup (popup);
+        }
+    });
 }
+
 
 function fillProfileInputs() {
     profileNameInput.value = userName.textContent;
@@ -30,6 +37,11 @@ function showEditUserProfilePopup(popup) {
 
 function hidePopup(popup) {
     popup.classList.remove('popup_opened');
+    popup.removeEventListener('mousedown', (evt) => {
+        if (evt.target.classList.contains('popup')) {
+            hidePopup (popup);
+        }
+    });
 }
 
 
@@ -111,8 +123,9 @@ function addCardToContainerStart (evt) {
 popupAddCard.addEventListener('submit', addCardToContainerStart);
 
 
-
-
-
-
-
+document.addEventListener('keydown', (evt) => {
+    const popupOpen = document.querySelector('.popup_opened');
+    if (evt.key == "Escape") {
+        hidePopup (popupOpen);
+    }
+});
