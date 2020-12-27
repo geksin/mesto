@@ -132,3 +132,14 @@ function closePopupEsc(evt) {
     if (evt.key == "Escape") {
         hidePopup (popupOpen);
 }};
+
+
+
+class Card {
+    constructor(data) {
+        this.name = data.name;
+        this.link = data.link;
+    }
+
+
+}
