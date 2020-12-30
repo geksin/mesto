@@ -1,5 +1,3 @@
-import {openImagePopup} from './index.js';
-
 export class Card {
 
     constructor(data) {
@@ -25,4 +23,4 @@ export class Card {
     }
 }
 
-  
+import {openImagePopup} from './index.js';
