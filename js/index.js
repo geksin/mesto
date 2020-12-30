@@ -1,3 +1,4 @@
+
 const openEditProfilePopupButton = document.querySelector('.profile__edit-button');
 const openAddCardPopupButton = document.querySelector('.profile__add-button');
 const closeEditProfilePopupButton = document.querySelector('.popup__button-close');
@@ -17,37 +18,7 @@ const popupSignature = popupImage.querySelector('.popup__signature');
 const imgpopupImage = popupImage.querySelector('.popup__img');
 const container = document.querySelector('.elements');
 
-class Card {
-    constructor(data) {
-        this._name = data.name;
-        this._link = data.link;
-        this._element = this._getTemplate();
-        this._cardImage = this._element.querySelector('.element__photo');
-    }
-    _getTemplate() {
-        return document.querySelector('.card__template').content.cloneNode(true);
-    }
-    createCard() {
-      this._element.querySelector('.element__name').textContent = this._name;
-      this._cardImage.alt = this._name;
-      this._cardImage.src = this._link;
-      this._setEventListeners();
-      return this._element;
-    }
-    _setEventListeners() {
-      this._element.querySelector('.element__button-delete').addEventListener('click', evt =>  evt.target.parentElement.remove());
-      this._element.querySelector('.element__button-like').addEventListener('click', evt => evt.target.classList.toggle('button-like_yes'));
-      this._cardImage.addEventListener('click', () => this._openImagePopup());
-    }
 
-    _openImagePopup () {
-        imgpopupImage.src = this._link;
-        imgpopupImage.title = this._name;
-        imgpopupImage.alt = "Фотография: " + this._name;
-        popupSignature.textContent = this._name;
-        showPopup(popupImage);
-    }
-  }
 
 function showPopup(popup) {
     popup.classList.add('popup_opened');
@@ -136,3 +107,32 @@ function closePopupEsc(evt) {
     if (evt.key == "Escape") {
         hidePopup (popupOpen);
 }};
+
+
+export function openImagePopup (link, text) {
+    imgpopupImage.src = link;
+    imgpopupImage.title = text;
+    imgpopupImage.alt = "Фотография: " + text;
+    popupSignature.textContent = text;
+    showPopup(popupImage);
+}
+
+// валидация
+
+const validationConfig = {
+    profilePopupForm: document.querySelector('.popup__form_edit'),
+    cardPopupForm: document.querySelector('.popup__form_add'),
+    inputSelector: '.popup__profile-input', 
+    sumbitButtomSelector: ".popup__button-save",
+    inputInvalidClass: "popup__profile-input_error",
+    buttonInvalidClass: "popup__button-save_disabled"
+};
+
+const profilePopupFormValidation = new FormValidator(validationConfig, validationConfig.profilePopupForm);
+profilePopupFormValidation.enableValidation();
+const cardPopupFormValidation = new FormValidator(validationConfig, validationConfig.cardPopupForm);
+cardPopupFormValidation.enableValidation();
+
+import {Card} from './Card.js';
+import {FormValidator} from './FormValidator.js';
+import {initialCards} from './initial-сards.js';
