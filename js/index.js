@@ -79,13 +79,11 @@ function formSubmitHandler (evt) {
 
 formElement.addEventListener('submit', formSubmitHandler);
 
-
 initialCards.forEach((items)=> {
     const card = new Card(items); 
     const cardElement = card.createCard();
     container.append(cardElement);
 }); 
-
 
 function addCardToContainerStart (evt) {
     evt.preventDefault();
