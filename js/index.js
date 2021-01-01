@@ -1,3 +1,6 @@
+import {initialCards} from './initial-сards.js'
+import {Card} from './Card.js'
+import {FormValidator} from './FormValidator.js'
 
 const openEditProfilePopupButton = document.querySelector('.profile__edit-button');
 const openAddCardPopupButton = document.querySelector('.profile__add-button');
@@ -130,7 +133,3 @@ const profilePopupFormValidation = new FormValidator(validationConfig, validatio
 profilePopupFormValidation.enableValidation();
 const cardPopupFormValidation = new FormValidator(validationConfig, validationConfig.cardPopupForm);
 cardPopupFormValidation.enableValidation();
-
-import {Card} from './Card.js';
-import {FormValidator} from './FormValidator.js';
-import {initialCards} from './initial-сards.js';
