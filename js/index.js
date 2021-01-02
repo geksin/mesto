@@ -20,7 +20,7 @@ const popupAll = document.querySelectorAll('.popup');
 const popupSignature = popupImage.querySelector('.popup__signature');
 const imgpopupImage = popupImage.querySelector('.popup__img');
 const container = document.querySelector('.elements');
-
+const cardTemplate = '.card__template';
 
 
 function showPopup(popup) {
@@ -83,7 +83,7 @@ function formSubmitHandler (evt) {
 formElement.addEventListener('submit', formSubmitHandler);
 
 initialCards.forEach((items)=> {
-    const card = new Card(items); 
+    const card = new Card(items, cardTemplate); 
     const cardElement = card.createCard();
     container.append(cardElement);
 }); 
@@ -94,7 +94,7 @@ function addCardToContainerStart (evt) {
         name: inputCardName.value,
         link: inputCardLink.value
      }
-    const cardStart = new Card(cardData);
+    const cardStart = new Card(cardData, cardTemplate);
     const cardElement = cardStart.createCard();
     container.prepend(cardElement);
     hidePopup (popupAddCard);
