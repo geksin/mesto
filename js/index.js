@@ -83,26 +83,6 @@ function profileFormSubmitHandler (evt) {
 
 profileForm.addEventListener('submit', profileFormSubmitHandler);
 
-function createNewCard(item) {
-    const cardStart = new Card(item, cardTemplate, openImagePopup);
-    const cardElement = cardStart.createCard();
-    return cardElement;
-}
-
-initialCards.forEach((items)=> {
-    container.append(createNewCard(items));
-}); 
-
-function addCardToContainerStart (evt) {
-    evt.preventDefault();
-    const cardData = {
-        name: inputCardName.value,
-        link: inputCardLink.value
-     }
-    container.prepend(createNewCard(cardData));
-    hidePopup (popupAddCard);
-}
-
 popupAddCard.addEventListener('submit', addCardToContainerStart);
 
 
@@ -136,3 +116,38 @@ const profilePopupFormValidation = new FormValidator(validationConfig, validatio
 profilePopupFormValidation.enableValidation();
 const cardPopupFormValidation = new FormValidator(validationConfig, validationConfig.cardPopupForm);
 cardPopupFormValidation.enableValidation();
+
+
+function createNewCard(item) {
+    const cardStart = new Card(item, cardTemplate, openImagePopup);
+    const cardElement = cardStart.createCard();
+    return cardElement;
+}
+
+initialCards.forEach((items)=> {
+    container.append(createNewCard(items));
+}); 
+
+function addCardToContainerStart (evt) {
+    evt.preventDefault();
+    const cardData = {
+        name: inputCardName.value,
+        link: inputCardLink.value
+     }
+    container.prepend(createNewCard(cardData));
+    hidePopup (popupAddCard);
+}
+
+// class Section {
+//     constructor({items,renderer}, container){
+//         this._items = items;
+//         this._renderer = renderer;
+//         this._container = container;
+//     }
+//     addItem() {
+//         this._container.append(this._items);
+//     }
+//     renderItems() {
+
+//     }
+// }
