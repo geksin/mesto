@@ -15,7 +15,7 @@ const profileDescriptionInput = document.getElementById('profile-profession');
 const inputCardName = document.getElementById('card-name');
 const inputCardLink = document.getElementById('card-link');
 const popupImage = document.querySelector('.popup_image');
-const formElement = document.querySelector('.popup__form');
+const profileForm = document.querySelector('.popup__form_edit');
 const popupAll = document.querySelectorAll('.popup');
 const popupSignature = popupImage.querySelector('.popup__signature');
 const imgpopupImage = popupImage.querySelector('.popup__img');
@@ -66,13 +66,14 @@ function showAddCardPopup(popup) {
     showPopup(popup)
     inputCardName.value = '';
     inputCardLink.value = '';
+    // Привет) Не совсем понял замечание: при открытии модалки кнопка забизейблена, это делается в валидаторе. 
 }
 
 
 popupImage.querySelector('.popup__button-close').addEventListener('click',() => hidePopup(popupImage));
 
 
-function formSubmitHandler (evt) {
+function profileFormSubmitHandler (evt) {
     evt.preventDefault(); 
 
      userName.textContent = profileNameInput.value;
@@ -80,12 +81,16 @@ function formSubmitHandler (evt) {
      hidePopup (popupEditUserProfile);
 }
 
-formElement.addEventListener('submit', formSubmitHandler);
+profileForm.addEventListener('submit', profileFormSubmitHandler);
+
+function createNewCard(item) {
+    const cardStart = new Card(item, cardTemplate, openImagePopup);
+    const cardElement = cardStart.createCard();
+    return cardElement;
+}
 
 initialCards.forEach((items)=> {
-    const card = new Card(items, cardTemplate); 
-    const cardElement = card.createCard();
-    container.append(cardElement);
+    container.append(createNewCard(items));
 }); 
 
 function addCardToContainerStart (evt) {
@@ -94,9 +99,7 @@ function addCardToContainerStart (evt) {
         name: inputCardName.value,
         link: inputCardLink.value
      }
-    const cardStart = new Card(cardData, cardTemplate);
-    const cardElement = cardStart.createCard();
-    container.prepend(cardElement);
+    container.prepend(createNewCard(cardData));
     hidePopup (popupAddCard);
 }
 
@@ -110,7 +113,7 @@ function closePopupEsc(evt) {
 }};
 
 
-export function openImagePopup (link, text) {
+function openImagePopup (link, text) {
     imgpopupImage.src = link;
     imgpopupImage.title = text;
     imgpopupImage.alt = "Фотография: " + text;
@@ -121,8 +124,8 @@ export function openImagePopup (link, text) {
 // валидация
 
 const validationConfig = {
-    profilePopupForm: document.querySelector('.popup__form_edit'),
-    cardPopupForm: document.querySelector('.popup__form_add'),
+    profilePopupForm: document.querySelector('.popup__form_edit'), // Передаю разные селекторы для каждой формы, потому что по заданию:
+    cardPopupForm: document.querySelector('.popup__form_add'), // "Для каждой проверяемой формы создайте экземпляр класса FormValidator" (могу переделать)
     inputSelector: '.popup__profile-input', 
     sumbitButtomSelector: ".popup__button-save",
     inputInvalidClass: "popup__profile-input_error",
