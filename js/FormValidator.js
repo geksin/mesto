@@ -26,7 +26,7 @@ export class FormValidator {
         }
     }
 
-    _setButtonState(submitButton, isActive) {
+    setButtonState(submitButton, isActive) {
         if (isActive) {
             submitButton.classList.remove(this._buttomDisabled);
             submitButton.disabled = false;
@@ -42,7 +42,7 @@ export class FormValidator {
             inputElement.addEventListener('input', () => {
                 this._checkInputValidity(inputElement);
                 const submitButton = this._form.querySelector(this._buttomSave);
-                this._setButtonState(submitButton,this._form.checkValidity());
+                this.setButtonState(submitButton,this._form.checkValidity());
             });
         });
     };
@@ -53,6 +53,6 @@ export class FormValidator {
             evt.preventDefault();
         });
         const submitButton = this._form.querySelector(this._buttomSave);
-       this._setButtonState(submitButton, this._form.checkValidity()); 
+       this.setButtonState(submitButton, this._form.checkValidity()); 
     }
 }
