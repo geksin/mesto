@@ -2,6 +2,8 @@ import {initialCards} from './initial-сards.js'
 import {Card} from './Card.js'
 import {FormValidator} from './FormValidator.js'
 
+console.log(initialCards);
+
 const openEditProfilePopupButton = document.querySelector('.profile__edit-button');
 const openAddCardPopupButton = document.querySelector('.profile__add-button');
 const closeEditProfilePopupButton = document.querySelector('.popup__button-close');
@@ -23,19 +25,7 @@ const container = document.querySelector('.elements');
 const cardTemplate = '.card__template';
 
 
-function showPopup(popup) {
-    popup.classList.add('popup_opened');
-    document.addEventListener('keydown', closePopupEsc);
-}
 
-
-popupAll.forEach((popup) => {
-    popup.addEventListener('mousedown', (evt) => {
-    if (evt.target.classList.contains('popup')) {
-        hidePopup (popup);
-    }
-}
-)});
 
 function fillProfileInputs() {
     profileNameInput.value = userName.textContent;
@@ -47,11 +37,6 @@ function showEditUserProfilePopup(popup) {
     fillProfileInputs ();
 }
 
-
-function hidePopup(popup) {
-    popup.classList.remove('popup_opened');
-    document.removeEventListener('keydown', closePopupEsc) 
-}
 
 
 
@@ -70,8 +55,6 @@ function showAddCardPopup(popup) {
 }
 
 
-popupImage.querySelector('.popup__button-close').addEventListener('click',() => hidePopup(popupImage));
-
 
 function profileFormSubmitHandler (evt) {
     evt.preventDefault(); 
@@ -86,20 +69,10 @@ profileForm.addEventListener('submit', profileFormSubmitHandler);
 popupAddCard.addEventListener('submit', addCardToContainerStart);
 
 
-function closePopupEsc(evt) {
-    const popupOpen = document.querySelector('.popup_opened');
-    if (evt.key == "Escape") {
-        hidePopup (popupOpen);
-}};
 
 
-function openImagePopup (link, text) {
-    imgpopupImage.src = link;
-    imgpopupImage.title = text;
-    imgpopupImage.alt = "Фотография: " + text;
-    popupSignature.textContent = text;
-    showPopup(popupImage);
-}
+
+
 
 // валидация
 
@@ -118,15 +91,15 @@ const cardPopupFormValidation = new FormValidator(validationConfig, validationCo
 cardPopupFormValidation.enableValidation();
 
 
-function createNewCard(item) {
-    const cardStart = new Card(item, cardTemplate, openImagePopup);
-    const cardElement = cardStart.createCard();
-    return cardElement;
-}
+// function createNewCard(item) {
+//     const cardStart = new Card(item, cardTemplate, openImagePopup);
+//     const cardElement = cardStart.createCard();
+//     return cardElement;
+// }
 
-initialCards.forEach((items)=> {
-    container.append(createNewCard(items));
-}); 
+// initialCards.forEach((items)=> {
+//     container.append(createNewCard(items));
+// }); 
 
 function addCardToContainerStart (evt) {
     evt.preventDefault();
@@ -138,16 +111,126 @@ function addCardToContainerStart (evt) {
     hidePopup (popupAddCard);
 }
 
-// class Section {
-//     constructor({items,renderer}, container){
-//         this._items = items;
-//         this._renderer = renderer;
-//         this._container = container;
-//     }
-//     addItem() {
-//         this._container.append(this._items);
-//     }
-//     renderItems() {
 
-//     }
-// }
+const createNewCard = (item) => {
+    const cardStart = new Card(item, cardTemplate, openImagePopup);
+    const cardElement = cardStart.createCard();
+    return cardElement;
+}
+class Section {
+    constructor({items, renderer}, container){
+        this._items = items;
+        this._renderer = renderer;
+        this._container = container;
+    }
+    addItem(element) {
+        this._container.append(element);
+    }
+    renderItems() {
+        this._items.forEach((item)=> {
+            this._renderer(item);
+        }); 
+
+    }
+}
+
+const cardList = new Section({
+    items:  initialCards,
+    renderer: (item) => {
+        const cardStart = new Card(item, cardTemplate, openImagePopup);
+        const cardElement = cardStart.createCard();
+        cardList.addItem(cardElement);
+        }
+    }, container
+    );
+cardList.renderItems();
+
+
+
+// popup
+
+function closePopupEsc(evt) {
+    const popupOpen = document.querySelector('.popup_opened');
+    if (evt.key == "Escape") {
+        hidePopup (popupOpen);
+}};
+
+
+function hidePopup(popup) {
+    popup.classList.remove('popup_opened');
+    document.removeEventListener('keydown', closePopupEsc) 
+}
+
+function showPopup(popup) {
+    popup.classList.add('popup_opened');
+    document.addEventListener('keydown', closePopupEsc);
+}
+
+
+popupAll.forEach((popup) => {
+    popup.addEventListener('mousedown', (evt) => {
+    if (evt.target.classList.contains('popup')) {
+        hidePopup (popup);
+    }
+})});
+
+popupImage.querySelector('.popup__button-close').addEventListener('click',() => hidePopup(popupImage));
+
+function openImagePopup (link, text) {
+    imgpopupImage.src = link;
+    imgpopupImage.title = text;
+    imgpopupImage.alt = "Фотография: " + text;
+    popupSignature.textContent = text;
+    showPopup(popupImage);
+}
+
+class Popup {
+    constructor(popuSelector) {
+        this._popup = popuSelector;
+    }
+    open() {
+        this._popup.classList.add('popup_opened');
+    }
+    close() {
+        this._popup.classList.remove('popup_opened');
+    }
+    _handleEscClose(evt) {
+        if (evt.key == "Escape") {
+            close() 
+        }
+    }
+    setEventListeners() {
+        this._popup.querySelector('.popup__button-close').addEventListener('click',() => close());
+    }
+}
+
+class PopupWithImage extends Popup {
+    constructor(popuSelector) {
+    super(popuSelector);
+    }
+    open(link, text) {
+        const imgpopupImage = popupImage.querySelector('.popup__img');
+        imgpopupImage.src = link;
+        imgpopupImage.title = text;
+        imgpopupImage.alt = "Фотография: " + text;
+        popupImage.querySelector('.popup__signature').textContent = text;
+        this._popup.classList.add('popup_opened');
+    }
+}
+
+class PopupWithForm extends Popup {
+    constructor(popuSelector, callBackSubbmitForm) {
+    super(popuSelector);
+    this._form = callBackSubbmitForm;
+    }
+    _getInputValues(){
+        profileNameInput.value = userName.textContent;
+        profileDescriptionInput.value = userDescription.textContent;
+    }
+    setEventListeners() {
+
+    }
+    close(){
+        
+    }
+}
