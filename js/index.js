@@ -51,7 +51,7 @@ function showAddCardPopup(popup) {
     showPopup(popup)
     inputCardName.value = '';
     inputCardLink.value = '';
-    // Привет) Не совсем понял замечание: при открытии модалки кнопка забизейблена, это делается в валидаторе. 
+    cardPopupFormValidation.setButtonState(popup.querySelector('.popup__button-save'),null);
 }
 
 
@@ -77,17 +77,15 @@ popupAddCard.addEventListener('submit', addCardToContainerStart);
 // валидация
 
 const validationConfig = {
-    profilePopupForm: document.querySelector('.popup__form_edit'), // Передаю разные селекторы для каждой формы, потому что по заданию:
-    cardPopupForm: document.querySelector('.popup__form_add'), // "Для каждой проверяемой формы создайте экземпляр класса FormValidator" (могу переделать)
     inputSelector: '.popup__profile-input', 
     sumbitButtomSelector: ".popup__button-save",
     inputInvalidClass: "popup__profile-input_error",
     buttonInvalidClass: "popup__button-save_disabled"
 };
 
-const profilePopupFormValidation = new FormValidator(validationConfig, validationConfig.profilePopupForm);
+const profilePopupFormValidation = new FormValidator(validationConfig, document.querySelector('.popup__form_edit'));
 profilePopupFormValidation.enableValidation();
-const cardPopupFormValidation = new FormValidator(validationConfig, validationConfig.cardPopupForm);
+const cardPopupFormValidation = new FormValidator(validationConfig, document.querySelector('.popup__form_add'));
 cardPopupFormValidation.enableValidation();
 
 
