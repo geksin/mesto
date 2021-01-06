@@ -8,12 +8,10 @@ const openEditProfilePopupButton = document.querySelector('.profile__edit-button
 const openAddCardPopupButton = document.querySelector('.profile__add-button');
 const closeEditProfilePopupButton = document.querySelector('.popup__button-close');
 const closeAddCardPopupButton = document.getElementById('popup-close-card');
-const popupEditUserProfile = document.querySelector('.popup_edit-profile');
+
 const popupAddCard = document.querySelector('.popup_add-card');
-const userName = document.querySelector('.profile__name');
-const userDescription = document.querySelector('.profile__subtitle');
-const profileNameInput = document.getElementById('profile-name');
-const profileDescriptionInput = document.getElementById('profile-profession');
+
+
 const inputCardName = document.getElementById('card-name');
 const inputCardLink = document.getElementById('card-link');
 const profileForm = document.querySelector('.popup__form_edit');
@@ -44,7 +42,7 @@ class Popup {
     }
     setEventListeners() {
         this._popup.querySelector('.popup__button-close').addEventListener('click',() => this.close());
-        this._popup.addEventListener('keydown', (evt) => this._handleEscClose(evt));
+        document.addEventListener('keydown', (evt) => this._handleEscClose(evt));
         this._popup.addEventListener('mousedown', (evt) => {
             if (evt.target.classList.contains('popup')) {
                 this.close();
@@ -59,7 +57,6 @@ export class PopupWithImage extends Popup {
     this._image = this._popup.querySelector('.popup__img');
     }
     open(link, text) {
-        console.log(link, text, this._popup);
         this._image.src = link;
         this._image.title = text;
         this._image.alt = "Фотография: " + text;
@@ -74,31 +71,71 @@ class PopupWithForm extends Popup {
     super(popupSelector);
     this._form = this._popup.querySelector('.popup__container');
     this._submitFormHandler = submitFormHandler;
-    this._inputList = Array.from(this._popupSelector.querySelectorAll('.popup__profile-input'));
-
+    this._inputList = Array.from(this._popup.querySelectorAll('.popup__profile-input'));
     }
+
     _getInputValues(){
         this._formValues = {};
-        this._inputList.forEach(input => {this._formValues[input.name] = input.value;});
+        this._inputList.forEach(input => { // обхожу все инпуты и присваиваю им значения 
+            this._formValues[input.name] = input.value;
+          });
         return this._formValues;
-        // profileNameInput.value = userName.textContent;
-        // profileDescriptionInput.value = userDescription.textContent;
+
     }
     setEventListeners() {
         super.setEventListeners();
         this._form.addEventListener('submit', (evt) => {
             evt.preventDefault();
-            this._submitFormHandler(this._getInputValues())
-//      userName.textContent = profileNameInput.value;
-//      userDescription.textContent = profileDescriptionInput.value;
+            this._submitFormHandler(_getInputValues()); //вот тут не уверен
             this.close()
         })
     }
     close(){
         super.close();
-        this._form.reset();
+        this._form.reset(); //ругается почему-то? 
+    }
+
+}
+
+class UserInfo {
+    constructor(inputName, inputDescription) {
+        this._inputName = inputName;
+        this._inputDescription = inputDescription;
+    }
+    getUserInfo() {
+        return {
+            userInfoName: this._inputName.textContent,
+            userInfoDescription: this._inputDescription.textContent
+        }
+    }
+    setUserInfo(profileName, profileDescription) {
+        profileName.value = this._inputName.textContent;
+        profileDescription.value = this._inputDescription.textContent;
     }
 }
+
+const popupEditUserProfile = document.querySelector('.popup_edit-profile');
+const userName = document.querySelector('.profile__name');
+const userDescription = document.querySelector('.profile__subtitle');
+const profileNameInput = document.getElementById('profile-name');
+const profileDescriptionInput = document.getElementById('profile-profession');
+
+const editPopupWithForm = new PopupWithForm(popupEditUserProfile, () => { //создаю новый попап
+    const userInfo = new UserInfo(userName, userDescription); //передал селекторы
+        const userData = userInfo.getUserInfo();  // получил значения 
+        profileNameInput = userData.userInfoName;  // переписал в инпуты
+        profileDescriptionInput = userData.userInfoDescription;
+        userInfo.setUserInfo(profileNameInput, profileDescriptionInput); // вроде бы вернул значения в инпут, кажется это нужно сделать при закрытии попапа
+});
+
+editPopupWithForm.setEventListeners(); 
+
+openEditProfilePopupButton.addEventListener('click', () => editPopupWithForm.open()); //по клику вызываю открытие попапа 
+
+openAddCardPopupButton.addEventListener('click', () => addPopupWithForm.open());
+
+const addPopupWithForm = new PopupWithForm(popupAddCard, () => {});
+addPopupWithForm.setEventListeners(); 
 
 
 
@@ -140,15 +177,7 @@ cardPopupFormValidation.enableValidation();
 //     container.append(createNewCard(items));
 // }); 
 
-function addCardToContainerStart (evt) {
-    evt.preventDefault();
-    const cardData = {
-        name: inputCardName.value,
-        link: inputCardLink.value
-     }
-    container.prepend(createNewCard(cardData));
-    hidePopup (popupAddCard);
-}
+
 
 
 const createNewCard = (item) => {
@@ -162,8 +191,11 @@ class Section {
         this._renderer = renderer;
         this._container = container;
     }
-    addItem(element) {
+    addItemStart(element) {
         this._container.append(element);
+    }
+    addItem(element) {
+        this._container.prepend(element);
     }
     renderItems() {
         this._items.forEach((item)=> {
@@ -178,13 +210,33 @@ const cardList = new Section({
     renderer: (item) => {
         const cardStart = new Card(item, cardTemplate) //openPopupWithImage);
         const cardElement = cardStart.createCard();
-        cardList.addItem(cardElement);
+        cardList.addItemStart(cardElement);
         }
     }, container
     );
 cardList.renderItems();
 
 
+// function addCardToContainerStart (evt) {
+//     evt.preventDefault();
+    const cardData = {
+        name: inputCardName.value,
+        link: inputCardLink.value
+     }
+//     container.prepend(createNewCard(cardData));
+//     hidePopup (popupAddCard);
+// }
+
+const addNewCard = new Section({
+    items:  cardData,
+    renderer: (item) => {
+        const cardAdd = new Card(item, cardTemplate) //openPopupWithImage);
+        const cardElement = cardAdd.createCard();
+        addNewCard.addItem(cardElement);
+        }
+    }, container
+    );  
+// addNewCard.renderItems();
 
 // popup
 

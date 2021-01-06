@@ -2,7 +2,7 @@ import {PopupWithImage} from './index.js';
 
 export class Card {
 
-    constructor(data, template) {//, handleCardClick) {
+    constructor(data, template) {
         this._name = data.name;
         this._link = data.link;
         this._template = document.querySelector(template);
@@ -23,9 +23,7 @@ export class Card {
     _setEventListeners() {
         this._element.querySelector('.element__button-delete').addEventListener('click', () => this.deleteCard());
         this._element.querySelector('.element__button-like').addEventListener('click', evt => this.like(evt));
-        // this._cardImage.addEventListener('click', () => this._handleCardClick(this._link, this._name));
-        this._element.addEventListener('click', () => this._handleCardClick.open(this._link, this._name));
-        this._element.addEventListener('click', () => console.log(this._link, this._name));
+        this._cardImage.addEventListener('click', () => this._handleCardClick.open(this._link, this._name));
 
     }
     like(evt){
