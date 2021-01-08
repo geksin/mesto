@@ -5,6 +5,7 @@ import {FormValidator} from '../components/FormValidator.js';
 import {UserInfo} from '../components/UserInfo.js';
 import {Section} from '../components/Section.js';
 import {PopupWithForm} from '../components/PopupWithForm.js';
+import {PopupWithImage} from '../components/PopupWithImage.js';
 
 import {openEditProfilePopupButton,
  openAddCardPopupButton, 
@@ -19,6 +20,7 @@ import {openEditProfilePopupButton,
 
 
 const userInfo = new UserInfo(userName, userDescription);
+const handleCardClick = new PopupWithImage(document.querySelector('.popup_image'));
 
 const editPopupWithForm = new PopupWithForm(popupEditUserProfile, (formData) => { 
         userInfo.setUserInfo(formData['profile-name'], formData['profile-profession']); 
@@ -38,7 +40,7 @@ openAddCardPopupButton.addEventListener('click', () => addPopupWithForm.open());
 
 const addPopupWithForm = new PopupWithForm(popupAddCard, (formData) => {
    const inputData = {name:formData['card-name'], link:formData['card-link']};
-    const cardAdd = new Card(inputData, cardTemplate);
+    const cardAdd = new Card(inputData, cardTemplate, handleCardClick);
                 const cardElement = cardAdd.createCard();
                 cardList.addItem(cardElement);
 });
@@ -47,7 +49,7 @@ addPopupWithForm.setEventListeners();
 const cardList = new Section({
     items:  initialCards,
     renderer: (item) => {
-        const cardStart = new Card(item, cardTemplate);
+        const cardStart = new Card(item, cardTemplate, handleCardClick);
         const cardElement = cardStart.createCard();
         cardList.addItemStart(cardElement);
         }

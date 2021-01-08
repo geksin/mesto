@@ -1,14 +1,12 @@
-import {PopupWithImage} from '../components/PopupWithImage.js';
-
 export class Card {
 
-    constructor(data, template) {
+    constructor(data, template, handleCardClick) {
         this._name = data.name;
         this._link = data.link;
         this._template = document.querySelector(template);
         this._element = this._getTemplate();
         this._cardImage = this._element.querySelector('.element__photo');
-        this._handleCardClick = new PopupWithImage(document.querySelector('.popup_image'));
+        this._handleCardClick = handleCardClick;
     }
     _getTemplate() {
         return this._template.content.querySelector('.element').cloneNode(true);
