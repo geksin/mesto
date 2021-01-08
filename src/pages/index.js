@@ -35,7 +35,8 @@ openEditProfilePopupButton.addEventListener('click', () => {
         profileDescriptionInput.value = userData.userInfoDescription;
 });
 
-openAddCardPopupButton.addEventListener('click', () => addPopupWithForm.open());
+openAddCardPopupButton.addEventListener('click', () => {addPopupWithForm.open();
+    addPopupWithForm.setEventListeners();});
 
 
 const addPopupWithForm = new PopupWithForm(popupAddCard, (formData) => {
@@ -44,7 +45,7 @@ const addPopupWithForm = new PopupWithForm(popupAddCard, (formData) => {
                 const cardElement = cardAdd.createCard();
                 cardList.addItem(cardElement);
 });
-addPopupWithForm.setEventListeners(); 
+ 
 
 const cardList = new Section({
     items:  initialCards,
