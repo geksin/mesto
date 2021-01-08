@@ -1,4 +1,4 @@
-import {Popup} from './Popup.js';
+import {Popup} from '../components/Popup.js';
 
 export class PopupWithForm extends Popup {
     constructor(popupSelector, submitFormHandler) {
@@ -10,10 +10,9 @@ export class PopupWithForm extends Popup {
 
     _getInputValues(){
         this._formValues = {};
-        this._inputList.forEach(input => { // обхожу все инпуты и присваиваю им значения 
+        this._inputList.forEach(input => { 
             this._formValues[input.name] = input.value;
           });
-          console.log(this._formValues);
         return this._formValues;
         
     }

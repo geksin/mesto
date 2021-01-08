@@ -1,22 +1,20 @@
-import {initialCards} from './initial-сards.js';
-import {Card} from './Card.js';
-import {FormValidator} from './FormValidator.js';
-import {UserInfo} from './UserInfo.js';
-import Popup from './Popup.js';
-import {Section} from './Section.js';
-import PopupWithImage from './PopupWithImage.js';
-import {PopupWithForm} from './PopupWithForm.js';
+import {initialCards} from '../utils/initial-сards.js';
+import {Card} from '../components/Card.js';
+import {FormValidator} from '../components/FormValidator.js';
+import {UserInfo} from '../components/UserInfo.js';
+import {Section} from '../components/Section.js';
+import {PopupWithForm} from '../components/PopupWithForm.js';
 
-const openEditProfilePopupButton = document.querySelector('.profile__edit-button');
-const openAddCardPopupButton = document.querySelector('.profile__add-button');
-const popupAddCard = document.querySelector('.popup_add-card');
-const container = document.querySelector('.elements');
-const cardTemplate = '.card__template';
-const popupEditUserProfile = document.querySelector('.popup_edit-profile');
-const userName = document.querySelector('.profile__name');
-const userDescription = document.querySelector('.profile__subtitle');
-const profileNameInput = document.getElementById('profile-name');
-const profileDescriptionInput = document.getElementById('profile-profession');
+import {openEditProfilePopupButton,
+ openAddCardPopupButton, 
+ popupAddCard,
+ container,
+ cardTemplate,
+ popupEditUserProfile,
+ userName,
+ userDescription,
+ profileNameInput,
+ profileDescriptionInput} from '../utils/constants.js' 
 
 
 const userInfo = new UserInfo(userName, userDescription);
