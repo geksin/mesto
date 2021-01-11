@@ -72,5 +72,3 @@ const profilePopupFormValidation = new FormValidator(validationConfig, document.
 profilePopupFormValidation.enableValidation();
 const cardPopupFormValidation = new FormValidator(validationConfig, document.querySelector('.popup__form_add'));
 cardPopupFormValidation.enableValidation();
-
-// Привет! спасибо за замечания, не смог воспроизвести ошибку "не добавляется картинка в карточке", вроде бы добавляется.
