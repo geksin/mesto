@@ -36,7 +36,6 @@ openEditProfilePopupButton.addEventListener('click', () => {
 });
 
 
-
 const addPopupWithForm = new PopupWithForm(popupAddCard, (formData) => {
     const cardAdd = new Card({name:formData['card-name'], link:formData['card-link']}, cardTemplate, handleCardClick);
     cardList.addItemEnd(cardAdd.createCard());
