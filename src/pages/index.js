@@ -35,24 +35,24 @@ openEditProfilePopupButton.addEventListener('click', () => {
         profileDescriptionInput.value = userData.userInfoDescription;
 });
 
-openAddCardPopupButton.addEventListener('click', () => {addPopupWithForm.open();
-    addPopupWithForm.setEventListeners();});
 
 
 const addPopupWithForm = new PopupWithForm(popupAddCard, (formData) => {
-   const inputData = {name:formData['card-name'], link:formData['card-link']};
-    const cardAdd = new Card(inputData, cardTemplate, handleCardClick);
-                const cardElement = cardAdd.createCard();
-                cardList.addItem(cardElement);
+    const cardAdd = new Card({name:formData['card-name'], link:formData['card-link']}, cardTemplate, handleCardClick);
+    cardList.addItemEnd(cardAdd.createCard());
 });
- 
+
+openAddCardPopupButton.addEventListener('click', () => { 
+    addPopupWithForm.open();
+});
+addPopupWithForm.setEventListeners();
+
 
 const cardList = new Section({
     items:  initialCards,
     renderer: (item) => {
         const cardStart = new Card(item, cardTemplate, handleCardClick);
-        const cardElement = cardStart.createCard();
-        cardList.addItemStart(cardElement);
+        cardList.addItemStart(cardStart.createCard());
         }
     }, container
     );
@@ -73,3 +73,5 @@ const profilePopupFormValidation = new FormValidator(validationConfig, document.
 profilePopupFormValidation.enableValidation();
 const cardPopupFormValidation = new FormValidator(validationConfig, document.querySelector('.popup__form_add'));
 cardPopupFormValidation.enableValidation();
+
+// Привет! спасибо за замечания, не смог воспроизвести ошибку "не добавляется картинка в карточке", вроде бы добавляется.

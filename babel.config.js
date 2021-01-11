@@ -13,5 +13,6 @@ const presets = [
       useBuiltIns: "entry"
     }]
   ];
+  const plugins = ["@babel/plugin-proposal-class-properties"];
   
-  module.exports = { presets };
+  module.exports = { presets, plugins };

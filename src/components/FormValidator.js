@@ -5,6 +5,8 @@ export class FormValidator {
         this._buttomSave = config.sumbitButtomSelector;
         this._errorClass = config.inputInvalidClass;
         this._buttomDisabled = config.buttonInvalidClass;
+        this._submitButton = this._form.querySelector(this._buttomSave);
+        this._inputsList = Array.from(this._form.querySelectorAll(this._input));
     }
     _showError(inputElement) {
         const error = this._form.querySelector(`#${inputElement.id}-error`);
@@ -37,12 +39,10 @@ export class FormValidator {
     };
 
     _setEventListeners () {
-        const inputsList = Array.from(this._form.querySelectorAll(this._input));
-        inputsList.forEach((inputElement) => {
+        this._inputsList.forEach((inputElement) => {
             inputElement.addEventListener('input', () => {
                 this._checkInputValidity(inputElement);
-                const submitButton = this._form.querySelector(this._buttomSave);
-                this.setButtonState(submitButton,this._form.checkValidity());
+                this.setButtonState(this._submitButton,this._form.checkValidity());
             });
         });
     };
@@ -52,7 +52,6 @@ export class FormValidator {
         this._form.addEventListener('submit', (evt) => {
             evt.preventDefault();
         });
-        const submitButton = this._form.querySelector(this._buttomSave);
-       this.setButtonState(submitButton, this._form.checkValidity()); 
+       this.setButtonState(this._submitButton, this._form.checkValidity()); 
     }
 }

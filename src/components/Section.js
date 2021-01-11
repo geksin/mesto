@@ -7,7 +7,7 @@ export class Section {
     addItemStart(element) {
         this._container.append(element);
     }
-    addItem(element) {
+    addItemEnd(element) {
         this._container.prepend(element);
     }
     renderItems() {
