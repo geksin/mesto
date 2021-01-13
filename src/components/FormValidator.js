@@ -37,6 +37,11 @@ export class FormValidator {
             submitButton.disabled = true;
         }
     };
+    resetValidation() {
+        this._inputsList.forEach((inputElement) => { 
+            this._hideError(inputElement);
+        });
+    }
 
     _setEventListeners () {
         this._inputsList.forEach((inputElement) => {

@@ -20,7 +20,12 @@ import {openEditProfilePopupButton,
 
 
 const userInfo = new UserInfo(userName, userDescription);
-const handleCardClick = new PopupWithImage(document.querySelector('.popup_image'));
+
+const imagePopup = new PopupWithImage(document.querySelector('.popup_image'));
+
+const handleCardClick = (link, name) => {
+    imagePopup.open(link, name)
+}
 
 const editPopupWithForm = new PopupWithForm(popupEditUserProfile, (formData) => { 
         userInfo.setUserInfo(formData['profile-name'], formData['profile-profession']); 
@@ -30,19 +35,27 @@ editPopupWithForm.setEventListeners();
 
 openEditProfilePopupButton.addEventListener('click', () => {
         editPopupWithForm.open();
+        profilePopupFormValidation.resetValidation();
         const userData = userInfo.getUserInfo();
         profileNameInput.value = userData.userInfoName;
         profileDescriptionInput.value = userData.userInfoDescription;
 });
 
 
+function createCard(item) {
+    const cardAdd = new Card(item, cardTemplate, handleCardClick);
+    return cardAdd.createCard()
+}
+
+
 const addPopupWithForm = new PopupWithForm(popupAddCard, (formData) => {
-    const cardAdd = new Card({name:formData['card-name'], link:formData['card-link']}, cardTemplate, handleCardClick);
-    cardList.addItemEnd(cardAdd.createCard());
+    const cardAdd = createCard({name:formData['card-name'], link:formData['card-link']});
+    cardList.addItemEnd(cardAdd);
 });
 
 openAddCardPopupButton.addEventListener('click', () => { 
     addPopupWithForm.open();
+    cardPopupFormValidation.resetValidation();
 });
 addPopupWithForm.setEventListeners();
 
@@ -50,8 +63,8 @@ addPopupWithForm.setEventListeners();
 const cardList = new Section({
     items:  initialCards,
     renderer: (item) => {
-        const cardStart = new Card(item, cardTemplate, handleCardClick);
-        cardList.addItemStart(cardStart.createCard());
+        const cardStart = createCard(item);
+        cardList.addItemStart(cardStart);
         }
     }, container
     );

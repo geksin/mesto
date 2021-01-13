@@ -24,7 +24,7 @@ export class Card {
     _setEventListeners() {
         this._buttonDelete.addEventListener('click', () => this._deleteCard());
         this._buttonLike.addEventListener('click', this._like);
-        this._cardImage.addEventListener('click', () => this._handleCardClick.open(this._link, this._name));
+        this._cardImage.addEventListener('click', () => this._handleCardClick(this._link, this._name));
     }
     _like = (evt) => {
         evt.target.classList.toggle('button-like_yes');
