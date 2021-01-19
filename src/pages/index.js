@@ -6,6 +6,7 @@ import {UserInfo} from '../components/UserInfo.js';
 import {Section} from '../components/Section.js';
 import {PopupWithForm} from '../components/PopupWithForm.js';
 import {PopupWithImage} from '../components/PopupWithImage.js';
+import Api from '../components/Api.js';
 
 import {openEditProfilePopupButton,
  openAddCardPopupButton, 
@@ -16,7 +17,8 @@ import {openEditProfilePopupButton,
  userName,
  userDescription,
  profileNameInput,
- profileDescriptionInput} from '../utils/constants.js' 
+ profileDescriptionInput} from '../utils/constants.js';
+// import { from } from 'webpack-sources/lib/CompatSource';
 
 
 const userInfo = new UserInfo(userName, userDescription);
@@ -61,14 +63,33 @@ addPopupWithForm.setEventListeners();
 
 
 const cardList = new Section({
-    items:  initialCards,
     renderer: (item) => {
         const cardStart = createCard(item);
         cardList.addItemStart(cardStart);
         }
     }, container
-    );
-cardList.renderItems();
+);
+
+const api = new Api({
+    address: 'https://mesto.nomoreparties.co/v1/cohort-19',
+    token: 'd0d17317-fe5c-4341-9c10-713100a37209'
+});
+
+Promise.all([     
+    api.getUserData(),
+    api.getInitialCards()
+  ])
+  .then((values)=>{
+      const user = values[0];
+      const cards = values[1];
+      console.log(user); 
+      console.log(cards);
+      userInfo.setUserInfo(user.name, user.about);
+      cardList.renderItems(cards);
+  })
+  .catch((err)=>{     
+        console.log(err);
+  })
 
 
 
