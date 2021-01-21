@@ -21,15 +21,14 @@ import {openEditProfilePopupButton,
 // import { from } from 'webpack-sources/lib/CompatSource';
 
 
-const userInfo = new UserInfo(userName, userDescription);
+const userInfo = new UserInfo(userName, userDescription, document.querySelector('.profile__avatar'));
 
 const imagePopup = new PopupWithImage(document.querySelector('.popup_image'));
 
-const handleCardClick = (link, name) => {
-    imagePopup.open(link, name)
-}
+
 
 const editPopupWithForm = new PopupWithForm(popupEditUserProfile, (formData) => { 
+        api.editProfile(formData);
         userInfo.setUserInfo(formData['profile-name'], formData['profile-profession']); 
     });
 
@@ -39,20 +38,84 @@ openEditProfilePopupButton.addEventListener('click', () => {
         editPopupWithForm.open();
         profilePopupFormValidation.resetValidation();
         const userData = userInfo.getUserInfo();
+        // userInfo.setUserInfo(serData.userInfoName, userData.userInfoDescription);
         profileNameInput.value = userData.userInfoName;
         profileDescriptionInput.value = userData.userInfoDescription;
 });
 
+// create card
+
+// function createCard(item) {
+//     const cardAdd = new Card(item, cardTemplate, handleCardClick);
+//     return cardAdd.createCard()
+// }
+
 
 function createCard(item) {
-    const cardAdd = new Card(item, cardTemplate, handleCardClick);
+    const cardAdd = new Card(item, cardTemplate, userInfo.getUserId(), {
+        handleCardClick: (link, name) => {
+            imagePopup.open(link, name)
+        }, 
+        handleLikeClick: (id, isLiked) => {
+            if (isLiked) {
+                api.remoteCardLike(id)
+                .then((res) => {
+                    console.log(res);
+                    cardAdd.setLike()
+                })
+                .catch((err) => {
+                    console.log(err)
+                })
+            } else {
+                api.setCardLikes(id)
+                .then((res) => {
+                    console.log(res);
+                    cardAdd.setLike()
+                })
+                .catch((err) => {
+                    console.log(err)
+                })
+            }
+
+        }, 
+        handleDeleteClick: (id) => {
+            api.deleteCard(id);
+            cardAdd.deleteCard();
+        }
+    });
     return cardAdd.createCard()
 }
 
 
+// колбеки для Card
+
+
+const handleLikeClick = (id, isLiked) => {
+
+}
+
+// const handleDeleteClick = (id) => {
+//     api.deleteCard(id);
+//     cardAdd.deleteCard();
+// }
+
+// конец колбеков
+
+
 const addPopupWithForm = new PopupWithForm(popupAddCard, (formData) => {
-    const cardAdd = createCard({name:formData['card-name'], link:formData['card-link']});
-    cardList.addItemEnd(cardAdd);
+
+    api.createCard({name:formData['card-name'], link:formData['card-link']})
+    .then((res)=>{
+        console.log(res);
+        const newCard = createCard(res);
+        cardList.addItemEnd(newCard);
+    //    console.log(userInfo.getUserId());
+    })
+    .catch((err)=>{     
+          console.log(err);
+    })
+    // const cardAdd = createCard({name:formData['card-name'], link:formData['card-link']});
+
 });
 
 openAddCardPopupButton.addEventListener('click', () => { 
@@ -82,10 +145,12 @@ Promise.all([
   .then((values)=>{
       const user = values[0];
       const cards = values[1];
-      console.log(user); 
-      console.log(cards);
-      userInfo.setUserInfo(user.name, user.about);
+    //   console.log(user); 
+      console.log(user._id);
+      userInfo.setUserInfo(user.name, user.about, user._id);
+      userInfo.setAvatar(user.avatar);
       cardList.renderItems(cards);
+  //    console.log(userInfo.getUserId());
   })
   .catch((err)=>{     
         console.log(err);
