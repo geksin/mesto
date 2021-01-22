@@ -8,3 +8,6 @@ export const userName = document.querySelector('.profile__name');
 export const userDescription = document.querySelector('.profile__subtitle');
 export const profileNameInput = document.getElementById('profile-name');
 export const profileDescriptionInput = document.getElementById('profile-profession');
+export const selectorDeletePopup = document.querySelector('.popup_delete-card');
+export const selectorImagePopup = document.querySelector('.popup_image');
+export const selectorImageAvatar = document.querySelector('.profile__avatar');

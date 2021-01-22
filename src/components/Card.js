@@ -5,6 +5,7 @@ export class Card {
         this._link = data.link;
         this._likes = data.likes;
         this._cadrId = data._id;
+        this._ownerId = data.owner._id;
         this._userId = userId;
         this._handleLikeClick = handleLikeClick;
         this._handleDeleteClick = handleDeleteClick;
@@ -29,36 +30,32 @@ export class Card {
         return this._element;
     }
     _setEventListeners() {
-        this._buttonDelete.addEventListener('click', () => this._handleDeleteClick(this._cadrId));
+        
         this._buttonLike.addEventListener('click', () => this._handleLikeClick(this._cadrId, this._checkLike()));
         this._cardImage.addEventListener('click', () => this._handleCardClick(this._link, this._name));
+        if (this._ownerId === this._userId.id) {
+            this._buttonDelete.addEventListener('click', () => this._handleDeleteClick(this._cadrId));
+        } else {
+            this._buttonDelete.style.display = 'none';
+        }
     }
-    // _like = (evt) => {
-    //     evt.target.classList.toggle('button-like_yes');
-    // }
     _checkLike() {
-        this._buttonLike.classList.contains('button-like_yes');
+        return this._buttonLike.classList.contains("button-like_yes")
     }
-
-    // _isLikeUserCard() {
-    //     for (let i = 0; i < this._likes.length; i++) {
-    //         if (this._likes[i]._id === this._userId) {
-    //             return true;
-    //         }    
-    //         }
-    //     return false;
-    // }
 
     deleteCard(){
         this._element.remove()
     }
     setLike() {
-        this._counter.textContent = (Number(this._counter.textContent) + 1);
         this._buttonLike.classList.toggle('button-like_yes');
     }
 
+    setCounter(arr){
+        this._counter.textContent = arr.length;
+    }
+
     setLikesStart() {
-        this._counter.textContent = this._likes.length;
+        this.setCounter(this._likes);
         if (this._likes.some((element) => element._id === this._userId.id)) {
             this._buttonLike.classList.add('button-like_yes');
         } else {
