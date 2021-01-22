@@ -10,7 +10,3 @@
 .profile__avatar:hover {
 opacity: 0.2;
 }
-
-.profile__avatar_r:hover {
-  background: rgba(0,0,0,0.2) url(../../../images/edit-profile.svg) no-repeat center;
-}

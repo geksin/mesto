@@ -37,3 +37,4 @@
 @import url("../blocks/element/__button-delete/element__button-delete.css");
 @import url("../blocks/popup/__button-save/_disabled/popup__button-save_disabled.css");
 @import url("../blocks/popup/__profile-input/_error/popup__profile-input_error.css");
+@import url("../blocks/profile/__avatar-hover/profile__avatar-hover.css");
