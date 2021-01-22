@@ -1,7 +1,8 @@
 export class UserInfo {
-    constructor(inputName, inputDescription) {
+    constructor(inputName, inputDescription, avatarImage) {
         this._inputName = inputName;
         this._inputDescription = inputDescription;
+        this._avatarImage = avatarImage;
     }
     getUserInfo() {
         return {
@@ -9,8 +10,18 @@ export class UserInfo {
             userInfoDescription: this._inputDescription.textContent
         }
     }
-    setUserInfo(profileName, profileDescription) {
+    setUserInfo(profileName, profileDescription, userId) {
         this._inputName.textContent = profileName;
         this._inputDescription.textContent = profileDescription;
+        this._userId = userId;
+    }
+    setAvatar(avatar) {
+        this._avatarImage.style.background = `url(${avatar}) center`;
+    }
+
+    getUserId() {
+        return {
+            id: this._userId
+        }
     }
 }

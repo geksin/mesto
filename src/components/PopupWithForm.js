@@ -31,4 +31,12 @@ export class PopupWithForm extends Popup {
         super.close();
     }
 
+    setLoadButton() {
+        this._popup.querySelector('.popup__button-save').textContent = 'Сохранение...';
+    }
+
+    returnLoadBotton(){
+        this._popup.querySelector('.popup__button-save').textContent = 'Сохранить';
+    }
+
 }
