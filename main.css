@@ -26,7 +26,7 @@
 .popup__img{max-width:75vw;max-height:75vh}
 .profile{margin:0 0 51px;display:flex;flex-direction:row;justify-content:space-between}@media screen and (max-width:767px){.profile{flex-direction:column;align-items:center;margin:0 0 36px}}
 .profile__add-button{width:150px;height:50px;align-self:center;border:2px solid #fff;background:none;transition:.3s;border-radius:2px}.profile__add-button:hover{opacity:.6}@media screen and (max-width:767px){.profile__add-button{max-width:282px;width:100%;margin:0 auto}}
-.profile__avatar{display:flex;height:120px;width:120px;border-radius:60px;-o-object-fit:cover;object-fit:cover;transition:.2s;background-image:url(images/Avatar.727b5baa123f981bf5e0.png) center}.profile__avatar:hover{opacity:.2}.profile__avatar_r:hover{background:rgba(0,0,0,.2) url(images/edit-profile.a086f758840ae814ecde.svg) no-repeat 50%}
+.profile__avatar{display:flex;height:120px;width:120px;border-radius:60px;-o-object-fit:cover;object-fit:cover;transition:.2s;background-image:url(images/Avatar.727b5baa123f981bf5e0.png) center}.profile__avatar:hover{opacity:.2}
 .profile__edit-button{width:24px;height:24px;align-self:center;border:1px solid #fff;background:none;margin-left:18px;transition:.3s}.profile__edit-button:hover{opacity:.6}@media screen and (max-width:767px){.profile__edit-button{width:18px;height:18px;padding:0;margin:26px 0 0 10px}}
 .profile__info{display:flex;flex-direction:row;justify-content:flex-start}@media screen and (max-width:767px){.profile__info{flex-direction:column;align-items:center}}
 .profile__name{margin:0;font-style:normal;font-weight:500;font-size:42px;line-height:48px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:450px}@media screen and (max-width:767px){.profile__name{margin-top:26px;font-size:27px;line-height:33px;max-width:250px}}
@@ -37,6 +37,7 @@
 .element__button-delete{width:48px;height:48px;border:none;border-radius:4px;background:url(images/Trash.cbc09a894bdd4c956365.svg) no-repeat 50%;right:0;top:0;transition:.3s;position:absolute}.element__button-delete:hover{opacity:.6}
 .popup__button-save_disabled{border:1px solid rgba(0,0,0,.2);background:none;color:rgba(0,0,0,.2)}.popup__button-save_disabled:hover{opacity:1}
 .popup__profile-input_error{border-bottom:1px solid red}
+.profile__avatar-hover:hover{background:rgba(0,0,0,.2) url(images/edit-profile.a086f758840ae814ecde.svg) no-repeat 50%}
 
 
 /*# sourceMappingURL=main.css.map*/
