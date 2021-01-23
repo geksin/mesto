@@ -35,8 +35,7 @@ popupConfirm.setEventListeners();
 
 const popupUploadAvatar = new PopupWithForm(document.querySelector('.popup_upload-avatar'), (data) => { 
     popupUploadAvatar.setLoadButton();
-
-    api.uploadUserAvatar(data.link)
+    api.uploadUserAvatar(data['card-link'])
     .then((data) => {
         userInfo.setAvatar(data.avatar);
       })
