@@ -138,7 +138,8 @@ const addPopupWithForm = new PopupWithForm(popupAddCard, (formData) => {
           console.log(err);
     })
     .finally(() => {
-        addPopupWithForm.returnLoadBotton()
+        addPopupWithForm.returnLoadBotton();
+        addPopupWithForm.close();
     })
 
 });

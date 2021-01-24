@@ -10,12 +10,14 @@ class Api {
           authorization: this._token
         }
       })
-      .then((res) => {
-        if (res.ok) {
-          return res.json();
-        }
-        return Promise.reject(`Что-то пошло не так: ${res.status}`);
-      })
+      .then((res) => this._returnServerResponse(res))
+  }
+
+  _returnServerResponse(res) {
+    if (res.ok) {
+      return res.json();
+    }
+    return Promise.reject(`Что-то пошло не так: ${res.status}`);
   }
 
   uploadUserAvatar(link) {
@@ -29,12 +31,7 @@ class Api {
           avatar: link,
       })
     })
-    .then((res) => {
-      if (res.ok) {
-        return res.json();
-      }
-      return Promise.reject(`Что-то пошло не так: ${res.status}`);
-    })
+    .then((res) => this._returnServerResponse(res))
 }
 
 
@@ -45,12 +42,7 @@ class Api {
         authorization: this._token
       }
     })
-    .then((res) => {
-      if (res.ok) {
-        return res.json();
-      }
-      return Promise.reject(`Что-то пошло не так: ${res.status}`);
-    })
+    .then((res) => this._returnServerResponse(res))
   }
 
   deleteCard (id) {
@@ -60,7 +52,7 @@ class Api {
                 authorization: this._token,
             }
         })
-            .then(result => result.ok ? result.json() : Promise.reject(`Ошибка ${result.status}`))
+        .then((res) => this._returnServerResponse(res))
   }
 
   getCardLike(id){
@@ -69,12 +61,7 @@ class Api {
         authorization: this._token
       }
     })
-    .then((res) => {
-      if (res.ok) {
-        return res.json();
-      }
-      return Promise.reject(`Что-то пошло не так: ${res.status}`);
-    })
+    .then((res) => this._returnServerResponse(res))
   }
 
   remoteCardLike(id){
@@ -84,7 +71,7 @@ class Api {
           authorization: this._token,
       }
   })
-      .then(result => result.ok ? result.json() : Promise.reject(`Ошибка ${result.status}`))
+      .then((res) => this._returnServerResponse(res))
   }
 
   setCardLikes(id) {
@@ -109,7 +96,7 @@ class Api {
             about: data['profile-profession']
         })
     })
-        .then(result => result.ok ? result.json() : Promise.reject(`Ошибка ${result.status}`))
+      .then((res) => this._returnServerResponse(res))
   }
 
   createCard(data) {
@@ -124,20 +111,9 @@ class Api {
             link: data.link
         })
     })
-        .then(result => result.ok ? result.json() : Promise.reject(`Ошибка ${result.status}`))
+    .then((res) => this._returnServerResponse(res))
   }
 
 }
 
 export default Api;
-
-
-// removeMessage(id) {
-//   return fetch(`${this._address}/messages/${id}`, {
-//       method: 'DELETE',
-//       headers: {
-//           authorization: this._token,
-//       }
-//   })
-//       .then(result => result.ok ? result.json() : Promise.reject(`Ошибка ${result.status}`))
-// }
